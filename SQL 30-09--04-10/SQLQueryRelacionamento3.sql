@@ -1,0 +1,1 @@
+﻿select car.Modelo, usua.Nome as Usuario_Criacao, car.Placa, car.Ano from Carros car inner join Usuarios usua on car.UsuarioCriacao = usua.Id 
