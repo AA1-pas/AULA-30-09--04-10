@@ -15,6 +15,6 @@ select  cli.Nome,sum(ped.valor) as 'Valor Total', iif(sum(ped.Valor) > 200000, '
 																				group by cli.Nome   --where cli.Nome = 'Renata'--
 
 select  cli.Nome,sum(ped.valor) as 'Valor Total', 
-iif(sum(ped.Valor) > 200000, 'Ganhou um Xiaomi','Não Ganhou um Xiaomi') as 'Resultado' 
+iif(sum(ped.Valor) > 200000, 'Ganhou um Xiaomi','Não Ganhou um Xiaomi') as 'Resultado'
 from Clientes cli inner join Pedidos ped on cli.Id = ped.ClienteId
 group by cli.Nome
