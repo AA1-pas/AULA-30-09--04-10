@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\ControllerFuncionario.cs" />
     <Compile Include="Controller\ControllerMercadoTech.cs" />
     <Compile Include="Model\Funcionario.cs" />
     <Compile Include="Model\ListaPedido.cs" />

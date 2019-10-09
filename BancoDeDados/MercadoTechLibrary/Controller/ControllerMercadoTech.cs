@@ -17,14 +17,11 @@ namespace MercadoTechLibrary.Controller
 
         public void ExecutaConexao()
         {
-            
-            
             connection.ConnectionString = (@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=MercadoTechDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             command.Connection = connection;
             try
             {
-                connection.Open();
-                    
+                connection.Open(); 
             }
             catch (Exception ex)
             {
@@ -187,7 +184,23 @@ namespace MercadoTechLibrary.Controller
             connection.Dispose();
             return pedidos;
         }
+     
+        public void GetAddPedidos(Pedido parametro)
+        {
+            ExecutaConexao();
+            command.CommandText = ($"INSERT INTO PEDIDOS(PRODUTOID,FUNCIONARIOID,QUANTIDADE) VALUES " +
+                $"('{parametro.ProdutoId}',{(parametro.FuncionarioId)},{parametro.Quantidade})");
+            command.ExecuteNonQuery();
+            connection.Dispose();
+        }
 
+        public void GetDesPedido(Pedido parametro)
+        {
+            ExecutaConexao();
+            command.CommandText = ($"UPDATE PEDIDOS SET ATIVO=0 WHERE ID ={parametro.Id}");
+            command.ExecuteNonQuery();
+            connection.Dispose();
+        }
     }
 
 }

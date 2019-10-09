@@ -18,7 +18,6 @@ namespace MercadoTech
             MenuPrincipal();
         }
 
-
         public static void MenuPrincipal()
         {
             int opcao = 0;
@@ -110,8 +109,13 @@ namespace MercadoTech
 
         public static void ListaFuncionarios()
         {
-            controllerMercadoTech.GetListaFuncionarios().ForEach(x => Console.WriteLine
-            ("Id: {0}\nNome: {1}\nAtivo: {2}\n----------------------------", x.Id, x.Nome, x.Ativo));
+           // ControllerFuncionario controllerFuncionario = new ControllerFuncionario();
+           //
+           // controllerFuncionario.GetPessoa().ToList().ForEach(x => Console.WriteLine
+           // ("Id: {0}\nNome: {1}\nAtivo: {2}\n----------------------------", x.Id, x.Nome, x.Ativo));
+
+            controllerMercadoTech.GetListaFuncionarios().ToList().ForEach(x => Console.WriteLine
+          ("Id: {0}\nNome: {1}\nAtivo: {2}\n----------------------------", x.Id, x.Nome, x.Ativo));
 
         }
 
@@ -241,8 +245,8 @@ namespace MercadoTech
             {
                 Console.Clear();
                 Console.WriteLine("------------- SISTEMA MERCADO TECH --------------\n");
-                Console.Write("1 - Listar Pedidos Cadastrados\n2 - Cadastrar Produtos\n" +
-                    "3 - Excluir Produtos\n4 - Desativar Produtos\n5 - Ativar Produtos\n6 - Alterar Valor\n9 - Voltar\n\nOpção: ");
+                Console.Write("1 - Listar Pedidos Cadastrados\n2 - Cadastrar Pedidos\n" +
+                    "3 - Excluir Produtos\n4 - Desativar Pedidos\n5 - Ativar Produtos\n6 - Alterar Valor\n9 - Voltar\n\nOpção: ");
                 int.TryParse(Console.ReadLine(), out opcao);
                 switch (opcao)
                 {
@@ -251,7 +255,7 @@ namespace MercadoTech
                         RetornaMenu();
                         break;
                     case 2:
-                       
+                        AdicionaPedidos();
                         RetornaMenu();
                         break;
                     case 3:
@@ -259,7 +263,7 @@ namespace MercadoTech
                         RetornaMenu();
                         break;
                     case 4:
-                       
+                        DesativaPedido();
                         RetornaMenu();
                         break;
                     case 5:
@@ -280,6 +284,32 @@ namespace MercadoTech
             controllerMercadoTech.GetListaPedidos().ForEach(x => Console.WriteLine
             ("Id: {0}\nProduto: {1}\nQuantidade: {2}\nValor: {3}\nTotal: {4}\nFuncionario: {5}\nAtivo: {6}\n----------------------------", 
             x.Id, x.Produto, x.Quantidade,x.Valor.ToString("C2"),x.Total.ToString("C2"),x.Funcionario, x.Ativo));
+
+        }
+
+        public static void AdicionaPedidos()
+        {
+          
+            Console.WriteLine("\nDigite o código do Funcionário: ");
+            int.TryParse(Console.ReadLine(), out int funId);
+            Console.WriteLine("\nDigite a quantidade do Produto: ");
+            int quan = int.Parse(Console.ReadLine());
+            Console.WriteLine("\nDigite o código do Produto: ");
+            int.TryParse(Console.ReadLine(), out int proId);
+            Pedido pedido = new Pedido();
+            pedido.FuncionarioId = funId;
+            pedido.Quantidade = quan;
+            pedido.ProdutoId = proId;
+            controllerMercadoTech.GetAddPedidos(pedido);
+        }
+
+        public static void DesativaPedido()
+        {
+            Console.Write("\nDigite o id do pedido que deseja desativar: ");
+            int pedId = int.Parse(Console.ReadLine());
+            Pedido pedido = new Pedido();
+            pedido.Id = pedId;
+            controllerMercadoTech.GetDesPedido(pedido);
 
         }
     }
